@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idFire: 2
   bulletsLimit: 20
-  weaponObj: {fileID: 3219545579132475594, guid: b166a1199bd2a99489cb7715e75aad45, type: 3}
   dual: 1
-  progetile: {fileID: 0}
+  continuous: 1
+  progetile: {fileID: 103189731604905301, guid: c9cd61e75a0944b469fd42d905225aa2, type: 3}
   damage: 10
   posHand: {x: -0.1, y: 0.6, z: 0}
+  reach: 2
+  posExitBullet: {x: 0, y: 0.8, z: 0}

@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Bazuca
   m_EditorClassIdentifier: 
   idFire: 3
-  weaponObj: {fileID: 3243469139066566627, guid: 2893a354be17046428964dab5ace1874, type: 3}
+  bulletsLimit: 20
   dual: 0
-  progetile: {fileID: 0}
+  continuous: 0
+  progetile: {fileID: 5951354510093710597, guid: 03b06b1c462c6e34dbed07ae79fc1582, type: 3}
   damage: 40
   posHand: {x: 0.1, y: -0.5, z: 0}
+  reach: 3
+  posExitBullet: {x: 0, y: 1.6, z: 0}

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8036675653184596743}
   - component: {fileID: 1464537422302605128}
   - component: {fileID: 2248448362616935981}
-  - component: {fileID: 8205707765383024743}
   m_Layer: 11
   m_Name: RifleWeapon
   m_TagString: Untagged
@@ -82,16 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8205707765383024743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2162904488316316503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d025515b311d2941be40f4b449a34db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponInf: {fileID: 0}

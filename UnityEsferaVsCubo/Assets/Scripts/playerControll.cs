@@ -35,7 +35,7 @@ public class playerControll : MonoBehaviour
 
         if (bullets < 0)
         {
-            act.SetWeapon(null);
+            act.SetWeapon(null, false);
         }
         else if (bullets > limit)
         {
@@ -75,15 +75,18 @@ public class playerControll : MonoBehaviour
         //Rotacionar
         float angZ = Vector2.SignedAngle(Vector2.up, delta);
         movementPlayer.TurnTo(angZ);
-
+        
+        weaponInfs wp = act.GetWeaponInfs();
         //Comando de atirar
         if (Input.GetButton("Fire1"))
         {
-
             if (Input.GetButtonDown("Fire1"))
             {
                 act.Fire();
             }
+        }else if (wp && wp.IsContinuous())
+        {
+            act.StopFire();
         }
         
     }

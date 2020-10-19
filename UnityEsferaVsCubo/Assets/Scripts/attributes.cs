@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class attributes : MonoBehaviour
 {
     [SerializeField]
+    private string nameId = "";
+    [SerializeField]
     private int hpMax = 100;
     [SerializeField]
     private Slider sliderHp = null;
@@ -12,11 +14,16 @@ public class attributes : MonoBehaviour
     private float timeHitStun = 0f;
     private movement movement;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         hpNow = hpMax;
         movement = GetComponent<movement>();
         actions = GetComponent<actions>();
+    }
+
+    public string NameId()
+    {
+        return nameId;
     }
 
     public actions GetActions()

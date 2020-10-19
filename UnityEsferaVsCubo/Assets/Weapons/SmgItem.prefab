@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponInf: {fileID: 11400000, guid: d4fc8c84d48bfbd4a8105154f4fde024, type: 2}
+  objWeapon: {fileID: 3219545579132475594, guid: b166a1199bd2a99489cb7715e75aad45, type: 3}
+  numberBulletsInstantie: 100
 --- !u!61 &3744112810002139411
 BoxCollider2D:
   m_ObjectHideFlags: 0

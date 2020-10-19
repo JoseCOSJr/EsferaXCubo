@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: 
   idFire: 1
-  weaponObj: {fileID: 2162904488316316503, guid: 6976bc1cec7bbb74baf5040bb24a638b, type: 3}
+  bulletsLimit: 20
   dual: 0
-  progetile: {fileID: 0}
+  continuous: 0
+  progetile: {fileID: 2881601766595005418, guid: 837e6284340f56340b57450ca70f3583, type: 3}
   damage: 20
   posHand: {x: 0, y: 0.3, z: 0}
+  reach: 10
+  posExitBullet: {x: 0, y: 1.6, z: 0}
