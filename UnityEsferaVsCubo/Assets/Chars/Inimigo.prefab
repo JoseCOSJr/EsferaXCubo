@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416436f83aadddb4582ff39ac56f6884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameId: Enemie Rifle
   hpMax: 100
   sliderHp: {fileID: 256048539555015771}
 --- !u!114 &3153596173804249208
@@ -478,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10520fadb44842f4986df0e461e2650b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponNow: {fileID: 11400000, guid: b9b608c2a3839414abce1b5c3b527a97, type: 2}
+  weaponBegin: {fileID: 3723083788203152380, guid: f01820c0375d8d8408efd69181c2cdc4, type: 3}
   hand1: {fileID: 1872698316318369796}
   hand2: {fileID: 1872698315168415385}
 --- !u!114 &4186421845323313747
@@ -766,8 +767,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1733472077
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &5163823530091523382
 MonoBehaviour:

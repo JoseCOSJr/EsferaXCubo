@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84766136adc33b48b30c922d3243882, type: 3}
   m_Name: Bazuca
   m_EditorClassIdentifier: 
+  clipExit: {fileID: 8300000, guid: 78bbf70b592c1084f917eb724ba4a877, type: 3}
+  clipHit: {fileID: 8300000, guid: a6dd752d7f185ee47bf7300c2aed1dd5, type: 3}
   idFire: 3
   bulletsLimit: 20
   dual: 0
@@ -19,5 +21,5 @@ MonoBehaviour:
   progetile: {fileID: 5951354510093710597, guid: 03b06b1c462c6e34dbed07ae79fc1582, type: 3}
   damage: 40
   posHand: {x: 0.1, y: -0.5, z: 0}
-  reach: 3
+  reach: 5
   posExitBullet: {x: 0, y: 1.6, z: 0}

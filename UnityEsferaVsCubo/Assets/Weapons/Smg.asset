@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84766136adc33b48b30c922d3243882, type: 3}
   m_Name: Smg
   m_EditorClassIdentifier: 
+  clipExit: {fileID: 8300000, guid: 368f8d9f67e800642a2f8921b02fe4f2, type: 3}
+  clipHit: {fileID: 8300000, guid: 7a5f20d6832bf5149bf961657ab2fc72, type: 3}
   idFire: 2
-  bulletsLimit: 20
+  bulletsLimit: 200
   dual: 1
   continuous: 1
   progetile: {fileID: 103189731604905301, guid: c9cd61e75a0944b469fd42d905225aa2, type: 3}

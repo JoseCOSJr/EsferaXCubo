@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84766136adc33b48b30c922d3243882, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
+  clipExit: {fileID: 8300000, guid: 35400631b8f815c4486224d47ac897a9, type: 3}
+  clipHit: {fileID: 8300000, guid: 60172d68550ab484c8fed365f41cd0b6, type: 3}
   idFire: 1
-  bulletsLimit: 20
+  bulletsLimit: 50
   dual: 0
   continuous: 0
   progetile: {fileID: 2881601766595005418, guid: 837e6284340f56340b57450ca70f3583, type: 3}

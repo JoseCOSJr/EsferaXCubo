@@ -42,11 +42,16 @@ public class attributes : MonoBehaviour
             timeHitStun -= Time.fixedDeltaTime;
     }
 
-    public void AddHp(int value, Vector2 force)
+    public void AddHp(int value, Vector2 force, playerControll playerKiller)
     {
         hpNow += value;
         if (hpNow <= 0f)
+        {
+            if (playerKiller)
+                playerKiller.AddScores(20);
+
             gameObject.SetActive(false);
+        }
 
         if (force.sqrMagnitude > 0f)
         {
@@ -55,5 +60,10 @@ public class attributes : MonoBehaviour
         }
 
         sliderHp.value = hpNow / hpMax;
+    }
+
+    public bool IsDead()
+    {
+        return hpNow <= 0;
     }
 }

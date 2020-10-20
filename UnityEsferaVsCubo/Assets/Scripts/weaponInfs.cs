@@ -3,6 +3,7 @@
 [CreateAssetMenu]
 public class weaponInfs : ScriptableObject
 {
+    public AudioClip clipExit, clipHit;
     [SerializeField]
     private int idFire = 0, bulletsLimit = 20;
     [SerializeField]

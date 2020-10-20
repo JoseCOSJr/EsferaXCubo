@@ -5,21 +5,31 @@ public class progetile : MonoBehaviour
     [SerializeField]
     private string nameId = "";
     [SerializeField]
-    [Range(5f, 20f)]
+    [Range(10f, 20f)]
     private float velocity = 10f;
     private float timeDelta;
     private weaponInfs weaponInfs;
     protected Rigidbody2D body;
-    private string tagOwner;
+    private attributes ownerAtb;
 
-    public void Inocation(weaponInfs infs, Vector3 pos, Vector2 dire, string tag)
+    public virtual void Inocation(weaponInfs infs, Vector3 pos, Vector2 dire, attributes atb)
     {
-        gameObject.SetActive(true);
-        tagOwner = tag;
         weaponInfs = infs;
+
+        //Som de saida do progetil
+        AudioSource ad = repository.GetAudioSource();
+        ad.PlayOneShot(weaponInfs.clipExit);
+
+        gameObject.SetActive(true);
+        ownerAtb = atb;
         timeDelta = infs.GetReach() / velocity;
         transform.position = pos;
         VelocityChange(dire * velocity);
+    }
+
+    public attributes GetAtbOwner()
+    {
+        return ownerAtb;
     }
 
     protected virtual void Awake()
@@ -48,6 +58,7 @@ public class progetile : MonoBehaviour
     {
         body.velocity = value;
         float angZ = Vector2.SignedAngle(transform.up, value);
+        
         transform.eulerAngles = Vector3.forward * angZ;
     }
 
@@ -55,14 +66,17 @@ public class progetile : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         attributes atb = collision.GetComponentInParent<attributes>();
-        if (atb && !atb.CompareTag(tagOwner))
+        if (atb && !atb.CompareTag(ownerAtb.tag))
             DamgeAplication(atb, 1f, Vector2.zero);
 
+        //Som de acerto do progetil
+        AudioSource ad = repository.GetAudioSource();
+        ad.PlayOneShot(weaponInfs.clipHit);
         gameObject.SetActive(false);
     }
 
     public virtual void DamgeAplication(attributes atb, float multiply, Vector2 force)
     {
-        atb.AddHp((int)(-weaponInfs.GetDamage()*multiply), Vector2.zero);
+        atb.AddHp((int)(-weaponInfs.GetDamage()*multiply), Vector2.zero, ownerAtb.GetActions().GetPlayerControll());
     }
 }

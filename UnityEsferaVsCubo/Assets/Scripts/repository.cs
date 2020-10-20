@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class repository : MonoBehaviour
 {
-    public enum typesObjs { progetiles, weapon, box, enemies}
+    public enum typesObjs { progetiles, weapon, box, enemies, audioSoucer}
     private static repository repositoryNow;
     [SerializeField]
     private boxItens baseBoxs = null;
@@ -12,7 +12,9 @@ public class repository : MonoBehaviour
     private List<weapon> allWeapons = new List<weapon>();
     [SerializeField]
     private attributes enemieBase = null;
-    private List<GameObject> progetilesList, weaponsList, boxsList, enemiesList;
+    [SerializeField]
+    private AudioSource audioSourceBase = null;
+    private List<GameObject> progetilesList, weaponsList, boxsList, enemiesList, audioSourceList;
 
     public static void InstantiateObjs(GameObject obj ,typesObjs types, int number=1)
     {
@@ -30,12 +32,18 @@ public class repository : MonoBehaviour
         {
             list = repositoryNow.weaponsList;
         }
+        else if(types == typesObjs.audioSoucer)
+        {
+            list = repositoryNow.audioSourceList;
+        }
 
-        for(int i = 0; i < number; i++)
+        for (int i = 0; i < number; i++)
         {
             GameObject objI = Instantiate(obj);
             objI.transform.SetParent(repositoryNow.transform);
-            objI.SetActive(false);
+            if (types != typesObjs.audioSoucer)
+                objI.SetActive(false);
+
             list.Add(objI);
         }
     }
@@ -47,31 +55,60 @@ public class repository : MonoBehaviour
 
     public static weapon GetWeapon(weapon which)
     {
-        List<GameObject> list = repositoryNow.weaponsList.FindAll(x => x.GetComponent<weapon>().NameId() == which.NameId());
-        GameObject obj = GetObjInList(list, typesObjs.weapon, which.gameObject);
+        GameObject obj = null;
+
+        while (!obj)
+        {
+            List<GameObject> list = repositoryNow.weaponsList.FindAll(x => x.GetComponent<weapon>().NameId() == which.NameId());
+            obj = GetObjInList(list, typesObjs.weapon, which.gameObject);
+        }
 
         return obj.GetComponent<weapon>();
     }
 
+
+    public static weapon GetRandomWeapon()
+    {
+        int id = Random.Range(0, repositoryNow.allWeapons.Count);
+        weapon wp = repositoryNow.allWeapons[id];
+
+        return GetWeapon(wp);
+    }
+
     public static progetile GetBullets(progetile which)
     {
-        List<GameObject> list = repositoryNow.progetilesList.FindAll(x => x.GetComponent<progetile>().NameId() == which.NameId());
-        GameObject obj = GetObjInList(list, typesObjs.progetiles, which.gameObject);
+        GameObject obj = null;
+
+        while (!obj)
+        {
+            List<GameObject> list = repositoryNow.progetilesList.FindAll(x => x.GetComponent<progetile>().NameId() == which.NameId());
+            obj = GetObjInList(list, typesObjs.progetiles, which.gameObject);
+        }
 
         return obj.GetComponent<progetile>();
     }
 
     public static attributes GetEnemie(attributes who)
     {
-        List<GameObject> list = repositoryNow.progetilesList.FindAll(x => x.GetComponent<attributes>().NameId() == who.NameId());
-        GameObject obj = GetObjInList(list, typesObjs.enemies, who.gameObject);
+        GameObject obj = null;
+
+        while (!obj)
+        {
+            List<GameObject> list = repositoryNow.progetilesList.FindAll(x => x.GetComponent<attributes>().NameId() == who.NameId());
+            obj = GetObjInList(list, typesObjs.enemies, who.gameObject);
+        }
 
         return obj.GetComponent<attributes>();
     }
 
     public static boxItens GetBox()
     {
-        GameObject obj = GetObjInList(repositoryNow.boxsList, typesObjs.box, repositoryNow.baseBoxs.gameObject);
+        GameObject obj = null;
+
+        while (!obj)
+        {
+            obj = GetObjInList(repositoryNow.boxsList, typesObjs.box, repositoryNow.baseBoxs.gameObject);
+        }
 
         return obj.GetComponent<boxItens>();
     }
@@ -79,13 +116,25 @@ public class repository : MonoBehaviour
     private static GameObject GetObjInList(List<GameObject> list, typesObjs type, GameObject objBase)
     {
         GameObject obj = list.Find(x => !x.activeInHierarchy);
+        if (type == typesObjs.audioSoucer)
+            obj = list.Find(x => !x.GetComponent<AudioSource>().isPlaying);
+
         if (!obj)
-        {
-            InstantiateObjs(objBase, type);
-            obj = list.Find(x => !x.activeInHierarchy);
-        }
+            InstantiateObjs(objBase, type, 5);
 
         return obj;
+    }
+
+    public static AudioSource GetAudioSource()
+    {
+        GameObject obj = null;
+
+        while (!obj)
+        {
+            obj = GetObjInList(repositoryNow.audioSourceList, typesObjs.audioSoucer, repositoryNow.audioSourceBase.gameObject);
+        }
+
+        return obj.GetComponent<AudioSource>();
     }
 
     private void Awake()
@@ -95,10 +144,12 @@ public class repository : MonoBehaviour
         weaponsList = new List<GameObject>();
         boxsList = new List<GameObject>();
         enemiesList = new List<GameObject>();
+        audioSourceList = new List<GameObject>();
 
         InstantiateObjs(baseBoxs.gameObject, typesObjs.box, 25);
-
+        InstantiateObjs(audioSourceBase.gameObject, typesObjs.audioSoucer, 50);
         InstantiateObjs(enemieBase.gameObject, typesObjs.enemies, 20);
+
 
         for(int i = 0; i < allWeapons.Count; i++)
         {

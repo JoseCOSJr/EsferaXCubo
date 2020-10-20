@@ -11,14 +11,19 @@ public class progetileBazuka : progetile
         base.Awake();
 
         damageRespaw = Instantiate(damageRespaw);
-        damageRespaw.transform.SetParent(transform.parent);
+        damageRespaw.transform.SetParent(repository.GetTransformRepository());
         damageRespaw.gameObject.SetActive(false);
         ative = false;
     }
 
+    public override void Inocation(weaponInfs infs, Vector3 pos, Vector2 dire, attributes atb)
+    {
+        base.Inocation(infs, pos, dire, atb);
+        ative = true;
+    }
+
     public override void DamgeAplication(attributes atb, float multiply, Vector2 force)
     {
-        ative = true;
         base.DamgeAplication(atb, 0.5f * multiply, force);
     }
 

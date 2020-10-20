@@ -9,6 +9,7 @@ public class damageArea : MonoBehaviour
     public void Invocation(progetile progetile, Vector3 pos)
     {
         this.progetile = progetile;
+        pos.z -= 1f;
         transform.position = pos;
         gameObject.SetActive(true);
     }

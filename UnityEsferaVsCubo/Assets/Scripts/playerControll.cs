@@ -7,9 +7,9 @@ public class playerControll : MonoBehaviour
     [SerializeField]
     private Transform transformTarget = null;
     [SerializeField]
-    private Text textScores = null;
+    private Text textScores = null, textAmmunition = null;
     private int scores = 0;
-    private int bullets = 0;
+    private int ammunition = 0;
     private movement movementPlayer;
     private attributes atb;
     // Start is called before the first frame update
@@ -24,28 +24,52 @@ public class playerControll : MonoBehaviour
     public void AddScores(int add)
     {
         scores += add;
-        textScores.text = "Pontos: " + scores;
+        textScores.text = "Pts: " + scores;
     }
 
-    public void AddBullets(int add)
+    public attributes GetAttributes()
+    {
+        return atb;
+    }
+
+    public void AddAmmunition(int add)
     {
         actions act = atb.GetActions();
         int limit = act.GetWeaponInfs().GetLimitBulets();
-        bullets += add;
+        ammunition += add;
 
-        if (bullets < 0)
+        if (ammunition <= 0)
         {
-            act.SetWeapon(null, false);
+            act.SetWeapon(null);
+            textAmmunition.gameObject.SetActive(false);
         }
-        else if (bullets > limit)
+        else 
         {
-            bullets = limit;
+            if (!textAmmunition.gameObject.activeInHierarchy)
+                textAmmunition.gameObject.SetActive(true);
+
+            textAmmunition.text = "" + ammunition;
+
+            if (ammunition > limit)
+                ammunition = limit;
         }
+
+        
     }
 
-    public void Setullets(int value)
+    public void AddAmmunition(float percent)
     {
-        bullets = value;
+        actions act = atb.GetActions();
+        int limit = act.GetWeaponInfs().GetLimitBulets();
+        int value = (int) (limit * percent);
+
+        AddAmmunition(value);
+    }
+
+    public void SetAmmunition(int value)
+    {
+        ammunition = 0;
+        AddAmmunition(value);
     }
 
     // Update is called once per frame
