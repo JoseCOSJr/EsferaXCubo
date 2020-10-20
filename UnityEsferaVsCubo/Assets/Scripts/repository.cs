@@ -14,6 +14,8 @@ public class repository : MonoBehaviour
     private attributes enemieBase = null;
     [SerializeField]
     private AudioSource audioSourceBase = null;
+    [SerializeField]
+    private LayerMask layerMaskObst, layerMaskChars;
     private List<GameObject> progetilesList, weaponsList, boxsList, enemiesList, audioSourceList;
 
     public static void InstantiateObjs(GameObject obj ,typesObjs types, int number=1)
@@ -53,6 +55,16 @@ public class repository : MonoBehaviour
         return repositoryNow.transform;
     } 
 
+    public static LayerMask GetLayerMaskObst()
+    {
+        return repositoryNow.layerMaskObst;
+    }
+
+    public static LayerMask GetLayerMaskChars()
+    {
+        return repositoryNow.layerMaskChars;
+    }
+
     public static weapon GetWeapon(weapon which)
     {
         GameObject obj = null;
@@ -63,7 +75,8 @@ public class repository : MonoBehaviour
             obj = GetObjInList(list, typesObjs.weapon, which.gameObject);
         }
 
-        return obj.GetComponent<weapon>();
+        weapon wp = obj.GetComponent<weapon>();
+        return wp;
     }
 
 
@@ -88,17 +101,23 @@ public class repository : MonoBehaviour
         return obj.GetComponent<progetile>();
     }
 
-    public static attributes GetEnemie(attributes who)
+    public static attributes GetEnemie()
     {
         GameObject obj = null;
 
         while (!obj)
         {
-            List<GameObject> list = repositoryNow.progetilesList.FindAll(x => x.GetComponent<attributes>().NameId() == who.NameId());
-            obj = GetObjInList(list, typesObjs.enemies, who.gameObject);
+            //Caso adicione outros inimigos o codigo já vai aceitar
+            List<GameObject> list = repositoryNow.enemiesList.FindAll(x => x.GetComponent<attributes>().NameId() == repositoryNow.enemieBase.NameId());
+            obj = GetObjInList(list, typesObjs.enemies, repositoryNow.enemieBase.gameObject);
         }
 
         return obj.GetComponent<attributes>();
+    }
+
+    public static int NumberEnemiesLive()
+    {
+        return repositoryNow.enemiesList.FindAll(x => x.activeInHierarchy).Count;
     }
 
     public static boxItens GetBox()
@@ -111,6 +130,11 @@ public class repository : MonoBehaviour
         }
 
         return obj.GetComponent<boxItens>();
+    }
+
+    public static int NumbersBoxEnable()
+    {
+        return repositoryNow.boxsList.FindAll(x => x.activeInHierarchy).Count;
     }
 
     private static GameObject GetObjInList(List<GameObject> list, typesObjs type, GameObject objBase)
@@ -146,17 +170,17 @@ public class repository : MonoBehaviour
         enemiesList = new List<GameObject>();
         audioSourceList = new List<GameObject>();
 
-        InstantiateObjs(baseBoxs.gameObject, typesObjs.box, 25);
+        InstantiateObjs(baseBoxs.gameObject, typesObjs.box, 50);
         InstantiateObjs(audioSourceBase.gameObject, typesObjs.audioSoucer, 50);
-        InstantiateObjs(enemieBase.gameObject, typesObjs.enemies, 20);
+        InstantiateObjs(enemieBase.gameObject, typesObjs.enemies, 50);
 
 
         for(int i = 0; i < allWeapons.Count; i++)
         {
             GameObject obj = allWeapons[i].gameObject;
-            int n = 5;
+            int n = 20;
             if (allWeapons[i].GetWeaponInfs().IsDual())
-                n = 10;
+                n *= 2;
 
             InstantiateObjs(obj, typesObjs.weapon, n);
         }

@@ -15,7 +15,7 @@ MonoBehaviour:
   clipExit: {fileID: 8300000, guid: 78bbf70b592c1084f917eb724ba4a877, type: 3}
   clipHit: {fileID: 8300000, guid: a6dd752d7f185ee47bf7300c2aed1dd5, type: 3}
   idFire: 3
-  bulletsLimit: 20
+  bulletsLimit: 30
   dual: 0
   continuous: 0
   progetile: {fileID: 5951354510093710597, guid: 03b06b1c462c6e34dbed07ae79fc1582, type: 3}

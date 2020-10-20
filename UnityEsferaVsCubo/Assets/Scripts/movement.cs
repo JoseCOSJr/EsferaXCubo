@@ -42,7 +42,6 @@ public class movement : MonoBehaviour
         }
     }
 
-
     public void TurnTo(float ang)
     {
         if (!atb.InHitStun())
@@ -53,5 +52,10 @@ public class movement : MonoBehaviour
     {
         body.constraints = RigidbodyConstraints2D.FreezeRotation;
         body.AddForce(force * body.mass, ForceMode2D.Impulse);
+    }
+
+    public bool InMoviment()
+    {
+        return body.velocity.sqrMagnitude != 0f;
     }
 }

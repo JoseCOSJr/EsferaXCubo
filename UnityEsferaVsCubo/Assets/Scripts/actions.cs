@@ -4,9 +4,7 @@ using UnityEngine;
 public class actions : MonoBehaviour
 {
     private Animator anima;
-    [SerializeField]
-    private weapon weaponBegin = null;
-    private weapon weaponNow = null;
+    private weapon weaponNow1 = null, weaponNow2 = null;
     private playerControll playerControll;
     [SerializeField]
     private Transform hand1 = null, hand2 = null;
@@ -18,19 +16,30 @@ public class actions : MonoBehaviour
         playerControll = GetComponent<playerControll>();
         atb = GetComponent<attributes>();
 
-        if (weaponBegin)
+        weapon wp = null;
+        if (CompareTag("Enemie"))
         {
-            weaponBegin = repository.GetWeapon(weaponBegin);
+            wp = repository.GetRandomWeapon();
         }
 
-        SetWeapon(weaponBegin);
+        SetWeapon(wp);
     }
 
-   
+
+    private void OnEnable()
+    {
+        if (weaponNow1) 
+        {
+            SetWeapon(null);
+            weapon wp = repository.GetRandomWeapon();
+            SetWeapon(wp);
+        }
+    }
+
     public void Fire()
     {
         anima.SetBool("fire", true);
-        if (!weaponNow)
+        if (!weaponNow1)
         {
             AudioClip clipHit = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Souds/Efx/9509__petenice__whoosh.wav", typeof(AudioClip));
             repository.GetAudioSource().PlayOneShot(clipHit);
@@ -39,15 +48,15 @@ public class actions : MonoBehaviour
 
     public weaponInfs GetWeaponInfs()
     {
-        if (weaponNow)
-            return weaponNow.GetWeaponInfs();
+        if (weaponNow1)
+            return weaponNow1.GetWeaponInfs();
 
         return null;
     }
 
     public void SetWeapon(weapon wp)
     {
-        if (weaponNow == wp)
+        if (weaponNow1 == wp)
         {
             if (playerControll && wp)
             {
@@ -62,32 +71,34 @@ public class actions : MonoBehaviour
                 GameObject objWp = wp.gameObject;
                 objWp.SetActive(objWp);
                 Vector3 posAjust = wp.GetWeaponInfs().GetPosHand();
-                objWp.transform.SetParent(hand1);
+                objWp.transform.SetParent(hand1,true);
                 objWp.transform.localPosition = posAjust;
                 objWp.transform.localEulerAngles = Vector3.zero;
+                weaponNow1 = wp;
+                wp.OriginalScale();
                 if (wp.GetWeaponInfs().IsDual())
                 {
-                    weapon wp2 = repository.GetWeapon(wp);
-                    objWp = wp2.gameObject;
+                    weaponNow2 = repository.GetWeapon(wp);
+                    objWp = weaponNow2.gameObject;
                     objWp.SetActive(true);
                     posAjust.x *= -1f;
-                    objWp.transform.SetParent(hand2);
+                    objWp.transform.SetParent(hand2, true);
                     objWp.transform.localPosition = posAjust;
                     objWp.transform.localEulerAngles = Vector3.zero;
+                    weaponNow2.OriginalScale();
                 }
 
-                weaponNow = wp;
                 anima.SetFloat("weapon", wp.GetWeaponInfs().GetIdFire());
                 if (playerControll)
                 {
                     playerControll.SetAmmunition(wp.GetWeaponInfs().GetLimitBulets() / 5);
                 }
             }
-            else if(weaponNow)
+            else if(weaponNow1)
             {
                 anima.SetFloat("weapon", 0);
                 DisableWeaponNow();
-                weaponNow = wp;
+                weaponNow1 = wp;
             }
         }
     }
@@ -95,12 +106,13 @@ public class actions : MonoBehaviour
 
     private void DisableWeaponNow()
     {
-        if (weaponNow)
+        if (weaponNow1)
         {
-            hand1.GetChild(0).gameObject.SetActive(false);
-            if (weaponNow.GetWeaponInfs().IsDual())
+            weaponNow1.gameObject.SetActive(false);
+            if (weaponNow2)
             {
-                hand2.GetChild(0).gameObject.SetActive(false);
+                weaponNow2.gameObject.SetActive(false);
+                weaponNow2 = null;
             }
         }
     }
@@ -112,7 +124,7 @@ public class actions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (weaponNow == null) 
+        if (weaponNow1 == null) 
         {
             if (collision.CompareTag("Enemie"))
             {
@@ -127,7 +139,7 @@ public class actions : MonoBehaviour
 
     public float ReachNow()
     {
-        if (weaponNow)
+        if (weaponNow1)
             return GetWeaponInfs().GetReach() + GetWeaponInfs().GetPosHand().y + GetWeaponInfs().GetPosExitBullet().y;
 
         return 1.25f;
@@ -140,7 +152,7 @@ public class actions : MonoBehaviour
 
     public void InocationBullet()
     {
-        if (weaponNow)
+        if (weaponNow1)
         {          
             weaponInfs wpInf = GetWeaponInfs();
             progetile p = wpInf.GetBullet();

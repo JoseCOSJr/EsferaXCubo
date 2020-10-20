@@ -3,6 +3,16 @@ using UnityEngine;
 
 public class boxItens : MonoBehaviour
 {
+    public void Respaw(Vector2 pos)
+    {
+        //Mudar posição mantendo posição Z em ceto valor
+        Vector3 posNew = pos;
+        posNew.z = 1f;
+        transform.position = posNew;
+
+        gameObject.SetActive(true);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         playerControll pct = collision.GetComponentInParent<playerControll>();
@@ -21,7 +31,9 @@ public class boxItens : MonoBehaviour
 
     private void BoxDisable(playerControll p)
     {
-        p.AddScores(10);
+        if (p)
+            p.AddScores(10);
+
         gameObject.SetActive(false);
     }
 

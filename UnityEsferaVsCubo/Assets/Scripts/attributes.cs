@@ -31,6 +31,11 @@ public class attributes : MonoBehaviour
         return actions;
     }
 
+    public movement GetMovement()
+    {
+        return movement;
+    }
+
     public bool InHitStun()
     {
         return timeHitStun > 0f;
@@ -40,6 +45,14 @@ public class attributes : MonoBehaviour
     {
         if (timeHitStun > 0f)
             timeHitStun -= Time.fixedDeltaTime;
+    }
+
+    public void Respaw(Vector2 pos)
+    {
+        transform.position = pos;
+        hpNow = hpMax;
+        timeHitStun = 0f;
+        gameObject.SetActive(true);
     }
 
     public void AddHp(int value, Vector2 force, playerControll playerKiller)

@@ -6,7 +6,8 @@ public class weapon : MonoBehaviour
     private weaponInfs weaponInf = null;
     [SerializeField]
     private int numberBulletsInstantie = 10;
-
+    [SerializeField]
+    private Vector3 sclOriginal;
 
     private void Awake()
     {
@@ -21,6 +22,20 @@ public class weapon : MonoBehaviour
     public weaponInfs GetWeaponInfs()
     {
         return weaponInf;
+    }
+
+    public void OriginalScale()
+    {
+        Vector3 sclParent = Vector3.one;
+
+        if (transform.parent)
+            sclParent = transform.parent.lossyScale;
+
+        Vector3 newScl = sclOriginal;
+        newScl.x /= sclParent.x;
+        newScl.y /= sclParent.y;
+        newScl.z /= sclParent.z;
+        transform.localScale = newScl;
     }
 
     //Ia colocar para pegar a arma

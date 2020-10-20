@@ -106,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 3752624420468436004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0.75, z: 0.5}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 3752624420598369206}
   m_RootOrder: 1
@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224ba17721d191842af4ee3532a68f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
   transformTarget: {fileID: 6580470811667641335}
   textScores: {fileID: 0}
   textAmmunition: {fileID: 6265956411993419807}
@@ -359,7 +360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10520fadb44842f4986df0e461e2650b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponBegin: {fileID: 0}
   hand1: {fileID: 3752624421111602190}
   hand2: {fileID: 3752624420468436005}
 --- !u!114 &6628657505977286952
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameId: Player
-  hpMax: 100
+  hpMax: 1000
   sliderHp: {fileID: 0}
 --- !u!1 &3752624421111602185
 GameObject:
@@ -405,7 +405,7 @@ Transform:
   m_GameObject: {fileID: 3752624421111602185}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0.75, z: 0.5}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 3752624420598369206}
   m_RootOrder: 0

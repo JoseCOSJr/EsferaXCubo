@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class playerControll : MonoBehaviour
 {
     [SerializeField]
+    private gameOver gameOver = null;
+    [SerializeField]
     private Transform transformTarget = null;
     [SerializeField]
     private Text textScores = null, textAmmunition = null;
@@ -83,19 +85,9 @@ public class playerControll : MonoBehaviour
 
         //Pegando posição do mouse no mundo
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Comparando com a do jogador
         Vector2 delta = mousePos;
         delta.x -= transform.position.x;
         delta.y -= transform.position.y;
-        //Ajustando mira
-        float distTarget = delta.magnitude;
-        //Caso o mouse estaja mais distance que alcance da arma
-        if (distTarget > act.ReachNow())
-        {
-            distTarget = act.ReachNow();
-        }
-        Vector2 posTarget = Vector2.up * distTarget;
-        transformTarget.localPosition = posTarget;
         //Rotacionar
         float angZ = Vector2.SignedAngle(Vector2.up, delta);
         movementPlayer.TurnTo(angZ);
@@ -112,15 +104,42 @@ public class playerControll : MonoBehaviour
         {
             act.StopFire();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
         
     }
 
     private void LateUpdate()
     {
+        actions act = atb.GetActions();
+
+        //Pegando posição do mouse no mundo
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Comparando com a do jogador
+        Vector2 delta = mousePos;
+        delta.x -= transform.position.x;
+        delta.y -= transform.position.y;
+        //Ajustando mira
+        float distTarget = delta.magnitude;
+        //Caso o mouse estaja mais distance que alcance da arma
+        if (distTarget > act.ReachNow())
+        {
+            distTarget = act.ReachNow();
+        }
+        Vector2 posTarget = Vector2.up * distTarget;
+        transformTarget.localPosition = posTarget;
+
         //Fazer camera seguir
         Vector3 posCam = Camera.main.transform.position;
         posCam.x = transform.position.x;
         posCam.y = transform.position.y;
         Camera.main.transform.position = posCam;
+    }
+
+    private void OnDisable()
+    {
+        gameOver.textScores.text = "Pontos: " + scores;
+        gameOver.gameObject.SetActive(true);
     }
 }

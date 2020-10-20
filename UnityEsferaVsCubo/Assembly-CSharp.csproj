@@ -62,12 +62,14 @@
     <Compile Include="Assets\Scripts\damageArea.cs" />
     <Compile Include="Assets\Scripts\progetile.cs" />
     <Compile Include="Assets\Scripts\attributes.cs" />
+    <Compile Include="Assets\Scripts\ia.cs" />
     <Compile Include="Assets\Scripts\actions.cs" />
     <Compile Include="Assets\Scripts\repository.cs" />
     <Compile Include="Assets\Scripts\movement.cs" />
     <Compile Include="Assets\Scripts\progetileSmg.cs" />
     <Compile Include="Assets\Scripts\boxItens.cs" />
-    <Compile Include="Assets\Scripts\ia.cs" />
+    <Compile Include="Assets\Scripts\stage.cs" />
+    <Compile Include="Assets\Scripts\gameOver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

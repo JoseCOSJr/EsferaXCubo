@@ -77,6 +77,6 @@ public class progetile : MonoBehaviour
 
     public virtual void DamgeAplication(attributes atb, float multiply, Vector2 force)
     {
-        atb.AddHp((int)(-weaponInfs.GetDamage()*multiply), Vector2.zero, ownerAtb.GetActions().GetPlayerControll());
+        atb.AddHp((int)(-weaponInfs.GetDamage()*multiply), force, ownerAtb.GetActions().GetPlayerControll());
     }
 }
