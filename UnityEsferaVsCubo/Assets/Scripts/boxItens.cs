@@ -7,7 +7,7 @@ public class boxItens : MonoBehaviour
     {
         //Mudar posição mantendo posição Z em ceto valor
         Vector3 posNew = pos;
-        posNew.z = 1f;
+        posNew.z = 0f;
         transform.position = posNew;
 
         gameObject.SetActive(true);
@@ -22,8 +22,6 @@ public class boxItens : MonoBehaviour
         {
             if (!pct)
                 pct = prt.GetAtbOwner().GetActions().GetPlayerControll();
-
-            AddItem(pct);
         }
 
         BoxDisable(pct);
@@ -34,28 +32,17 @@ public class boxItens : MonoBehaviour
         if (p)
             p.AddScores(10);
 
+        AddItem();
         gameObject.SetActive(false);
     }
 
-    private void AddItem(playerControll pct)
+    private void AddItem()
     {
-        //Chances de pegar arma ou munição
-        float luck = Random.value;
+        //Pegando arma aleatoria
+        weapon wp = repository.GetRandomWeapon();
+        wp.Respaw(transform.position);
 
-        //Caso dê um certo valor aleatorio ou jogador não tenha nenhuma arma ele recbe nova arma
-        if (luck > 0.8f || !pct.GetAttributes().GetActions().GetWeaponInfs())
-        {
-            //Pegando arma aleatoria
-            weapon wp = repository.GetRandomWeapon();
-            pct.GetAttributes().GetActions().SetWeapon(wp);
-        }
-        else
-        {
-            //Ganhando munição
-            pct.AddAmmunition(0.1f);
-        }
-
-        AudioClip clipHit = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Souds/Efx/260437__roganmcdougald__combat-knife-sheath.wav", typeof(AudioClip));
+        AudioClip clipHit = repository.GetRepository().clipBoxCatch;
         repository.GetAudioSource().PlayOneShot(clipHit);
     }
 }

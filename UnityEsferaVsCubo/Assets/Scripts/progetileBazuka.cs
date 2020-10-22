@@ -11,7 +11,7 @@ public class progetileBazuka : progetile
         base.Awake();
 
         damageRespaw = Instantiate(damageRespaw);
-        damageRespaw.transform.SetParent(repository.GetTransformRepository());
+        damageRespaw.transform.SetParent(repository.GetRepository().transform);
         damageRespaw.gameObject.SetActive(false);
         ative = false;
     }

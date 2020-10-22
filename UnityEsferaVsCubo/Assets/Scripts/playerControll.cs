@@ -22,7 +22,6 @@ public class playerControll : MonoBehaviour
         AddScores(0);
     }
 
-
     public void AddScores(int add)
     {
         scores += add;

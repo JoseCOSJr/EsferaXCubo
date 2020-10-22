@@ -13,10 +13,12 @@ public class attributes : MonoBehaviour
     private actions actions;
     private float timeHitStun = 0f;
     private movement movement;
+    private ia ia;
     // Start is called before the first frame update
     void Awake()
     {
         hpNow = hpMax;
+        ia = GetComponent<ia>();
         movement = GetComponent<movement>();
         actions = GetComponent<actions>();
     }
@@ -71,6 +73,10 @@ public class attributes : MonoBehaviour
             timeHitStun = 0.5f;
             movement.AddForce(force);
         }
+
+        //Caso inimigo leve tiro do jogador ele vai atras dele
+        if (playerKiller && ia)
+            ia.OnTarget(playerKiller.GetAttributes());
 
         sliderHp.value = hpNow / hpMax;
     }

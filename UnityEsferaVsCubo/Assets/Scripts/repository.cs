@@ -16,6 +16,7 @@ public class repository : MonoBehaviour
     private AudioSource audioSourceBase = null;
     [SerializeField]
     private LayerMask layerMaskObst, layerMaskChars;
+    public AudioClip clipPunch, clipPuchHit, clipBoxCatch;
     private List<GameObject> progetilesList, weaponsList, boxsList, enemiesList, audioSourceList;
 
     public static void InstantiateObjs(GameObject obj ,typesObjs types, int number=1)
@@ -50,9 +51,9 @@ public class repository : MonoBehaviour
         }
     }
 
-    public static Transform GetTransformRepository()
+    public static repository GetRepository()
     {
-        return repositoryNow.transform;
+        return repositoryNow;
     } 
 
     public static LayerMask GetLayerMaskObst()
@@ -76,6 +77,7 @@ public class repository : MonoBehaviour
         }
 
         weapon wp = obj.GetComponent<weapon>();
+        wp.UseWeapon();
         return wp;
     }
 
@@ -144,7 +146,13 @@ public class repository : MonoBehaviour
             obj = list.Find(x => !x.GetComponent<AudioSource>().isPlaying);
 
         if (!obj)
+        {
             InstantiateObjs(objBase, type, 5);
+        }
+        else
+        {
+            obj.SetActive(true);
+        }
 
         return obj;
     }

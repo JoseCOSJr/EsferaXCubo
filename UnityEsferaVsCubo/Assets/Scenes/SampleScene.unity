@@ -796,6 +796,9 @@ MonoBehaviour:
   layerMaskChars:
     serializedVersion: 2
     m_Bits: 256
+  clipPunch: {fileID: 8300000, guid: da666faf806642247b7c09991d019b50, type: 3}
+  clipPuchHit: {fileID: 8300000, guid: 6af55cd276794bc4a8cac3937ef0ac64, type: 3}
+  clipBoxCatch: {fileID: 8300000, guid: b99f4068c5ade614ea6820c9251f09c8, type: 3}
 --- !u!4 &448447485
 Transform:
   m_ObjectHideFlags: 0
@@ -1803,7 +1806,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5328243321746893765, guid: 50f5c9e85e115ee408627ce85084abc3, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d9e03a62f64577b4ba0934f38e54ac55, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

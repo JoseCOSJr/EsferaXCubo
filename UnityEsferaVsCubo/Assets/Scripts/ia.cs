@@ -25,6 +25,7 @@ public class ia : MonoBehaviour
     private void OnEnable()
     {
         stateNow = statesIa.awareness;
+        atbTarget = null;
         StartCoroutine(IAAtive());
     }
 
@@ -147,6 +148,15 @@ public class ia : MonoBehaviour
             }
 
             yield return new WaitForSeconds(timeAction);
+        }
+    }
+
+    public void OnTarget(attributes atb)
+    {
+        if (!atb.CompareTag(tag))
+        {
+            stateNow = statesIa.chase;
+            atbTarget = atb;
         }
     }
 

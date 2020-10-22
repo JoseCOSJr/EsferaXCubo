@@ -38,11 +38,14 @@ public class actions : MonoBehaviour
 
     public void Fire()
     {
-        anima.SetBool("fire", true);
-        if (!weaponNow1)
+        if (!anima.GetBool("fire"))
         {
-            AudioClip clipHit = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Souds/Efx/9509__petenice__whoosh.wav", typeof(AudioClip));
-            repository.GetAudioSource().PlayOneShot(clipHit);
+            anima.SetBool("fire", true);
+            if (!weaponNow1)
+            {
+                AudioClip clipHit = repository.GetRepository().clipPunch;
+                repository.GetAudioSource().PlayOneShot(clipHit);
+            }
         }
     }
 
@@ -68,6 +71,7 @@ public class actions : MonoBehaviour
             if (wp)
             {
                 DisableWeaponNow();
+                wp.gameObject.SetActive(true);
                 GameObject objWp = wp.gameObject;
                 objWp.SetActive(objWp);
                 Vector3 posAjust = wp.GetWeaponInfs().GetPosHand();
@@ -79,6 +83,7 @@ public class actions : MonoBehaviour
                 if (wp.GetWeaponInfs().IsDual())
                 {
                     weaponNow2 = repository.GetWeapon(wp);
+                    weaponNow2.gameObject.SetActive(true);
                     objWp = weaponNow2.gameObject;
                     objWp.SetActive(true);
                     posAjust.x *= -1f;
@@ -128,7 +133,7 @@ public class actions : MonoBehaviour
         {
             if (collision.CompareTag("Enemie"))
             {
-                AudioClip clipHit = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Souds/Efx/448982__ethanchase7744__punch.wav", typeof(AudioClip));
+                AudioClip clipHit = repository.GetRepository().clipPuchHit;
                 repository.GetAudioSource().PlayOneShot(clipHit);
                 attributes atb = collision.GetComponentInParent<attributes>();
                 Vector2 force = Quaternion.Euler(Vector3.forward*transform.eulerAngles.z) * Vector2.up * 5f;

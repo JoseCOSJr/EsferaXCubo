@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5984256713304658667}
   - component: {fileID: 8525568002795785305}
   - component: {fileID: 3723083788203152380}
-  m_Layer: 11
+  - component: {fileID: 9054675031720818204}
+  m_Layer: 12
   m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,3 +98,29 @@ MonoBehaviour:
   weaponInf: {fileID: 11400000, guid: b9b608c2a3839414abce1b5c3b527a97, type: 2}
   numberBulletsInstantie: 100
   sclOriginal: {x: 0.4, y: 0.8, z: 1}
+--- !u!61 &9054675031720818204
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6681872153028534942}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2}
+  m_EdgeRadius: 0

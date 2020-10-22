@@ -17,11 +17,14 @@ public class damageArea : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         attributes atb = collision.GetComponentInParent<attributes>();
-        Vector2 force = atb.transform.position;
-        force.x -= transform.position.x;
-        force.y -= transform.position.y;
-        force = force.normalized * forceImpulse;
-        progetile.DamgeAplication(atb, 3f, force);
+        if (atb)
+        {
+            Vector2 force = atb.transform.position;
+            force.x -= transform.position.x;
+            force.y -= transform.position.y;
+            force = force.normalized * forceImpulse;
+            progetile.DamgeAplication(atb, 3f, force);
+        }
     }
 
     public void Disable()
