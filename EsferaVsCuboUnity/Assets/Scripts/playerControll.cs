@@ -4,14 +4,15 @@ using UnityEngine.UI;
 
 public class playerControll : MonoBehaviour
 {
+    public static bool canMove = true;
     [SerializeField]
     private gameOver gameOver = null;
-    [SerializeField]
-    private Transform transformTarget = null;
-    [SerializeField]
-    private Text textScores = null, textAmmunition = null;
-    private int scores = 0;
-    private int ammunition = 0;
+    /*[SerializeField]
+    private Transform transformTarget = null;*/
+    /*[SerializeField]
+    private Text textScores = null, textAmmunition = null;*/
+    //private int scores = 0;
+    //private int ammunition = 0;
     private movement movementPlayer;
     private attributes atb;
     // Start is called before the first frame update
@@ -20,12 +21,13 @@ public class playerControll : MonoBehaviour
         movementPlayer = GetComponent<movement>();
         atb = GetComponent<attributes>();
         AddScores(0);
+        canMove = true;
     }
 
     public void AddScores(int add)
     {
-        scores += add;
-        textScores.text = "Pts: " + scores;
+        /*scores += add;
+        textScores.text = "Pts: " + scores;*/
     }
 
     public attributes GetAttributes()
@@ -37,7 +39,7 @@ public class playerControll : MonoBehaviour
     {
         actions act = atb.GetActions();
         int limit = act.GetWeaponInfs().GetLimitBulets();
-        ammunition += add;
+        /*ammunition += add;
 
         if (ammunition <= 0)
         {
@@ -53,9 +55,7 @@ public class playerControll : MonoBehaviour
 
             if (ammunition > limit)
                 ammunition = limit;
-        }
-
-        
+        }*/
     }
 
     public void AddAmmunition(float percent)
@@ -69,76 +69,79 @@ public class playerControll : MonoBehaviour
 
     public void SetAmmunition(int value)
     {
-        ammunition = 0;
-        AddAmmunition(value);
+        /*ammunition = 0;
+        AddAmmunition(value);*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        actions act = atb.GetActions();
-
-        //Movimentação
-        Vector2 dire = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        movementPlayer.Move(dire);
-
-        //Pegando posição do mouse no mundo
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 delta = mousePos;
-        delta.x -= transform.position.x;
-        delta.y -= transform.position.y;
-        //Rotacionar
-        float angZ = Vector2.SignedAngle(Vector2.up, delta);
-        movementPlayer.TurnTo(angZ);
-        
-        weaponInfs wp = act.GetWeaponInfs();
-        //Comando de atirar
-        if (Input.GetButton("Fire1"))
+        if (canMove)
         {
-            if (Input.GetButtonDown("Fire1"))
+            actions act = atb.GetActions();
+
+            //Movimentação
+            Vector2 dire = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            movementPlayer.Move(dire);
+
+            //Pegando posição do mouse no mundo
+            /*Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 delta = mousePos;
+            delta.x -= transform.position.x;
+            delta.y -= transform.position.y;
+            //Rotacionar
+            float angZ = Vector2.SignedAngle(Vector2.up, delta);
+            movementPlayer.TurnTo(angZ);*/
+
+            weaponInfs wp = act.GetWeaponInfs();
+            //Comando de atirar
+            /*if (Input.GetButton("Fire1"))
             {
-                act.Fire();
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    act.Fire();
+                }
             }
-        }else if (wp && wp.IsContinuous())
-        {
-            act.StopFire();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
-        
+            else if (wp && wp.IsContinuous())
+            {
+                act.StopFire();
+            }*/
+        }     
     }
 
     private void LateUpdate()
     {
-        actions act = atb.GetActions();
-
-        //Pegando posição do mouse no mundo
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Comparando com a do jogador
-        Vector2 delta = mousePos;
-        delta.x -= transform.position.x;
-        delta.y -= transform.position.y;
-        //Ajustando mira
-        float distTarget = delta.magnitude;
-        //Caso o mouse estaja mais distance que alcance da arma
-        if (distTarget > act.ReachNow())
+        if (canMove)
         {
-            distTarget = act.ReachNow();
-        }
-        Vector2 posTarget = Vector2.up * distTarget;
-        transformTarget.localPosition = posTarget;
+            actions act = atb.GetActions();
 
-        //Fazer camera seguir
-        Vector3 posCam = Camera.main.transform.position;
-        posCam.x = transform.position.x;
-        posCam.y = transform.position.y;
-        Camera.main.transform.position = posCam;
+            //Pegando posição do mouse no mundo
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //Comparando com a do jogador
+            Vector2 delta = mousePos;
+            delta.x -= transform.position.x;
+            delta.y -= transform.position.y;
+            //Ajustando mira
+            float distTarget = delta.magnitude;
+            //Caso o mouse estaja mais distance que alcance da arma
+            if (distTarget > act.ReachNow())
+            {
+                distTarget = act.ReachNow();
+            }
+            Vector2 posTarget = Vector2.up * distTarget;
+            //transformTarget.localPosition = posTarget;
+
+            //Fazer camera seguir
+            Vector3 posCam = Camera.main.transform.position;
+            posCam.x = transform.position.x;
+            posCam.y = transform.position.y;
+            Camera.main.transform.position = posCam;
+        }
     }
 
     private void OnDisable()
     {
-        gameOver.textScores.text = "Pontos: " + scores;
-        gameOver.gameObject.SetActive(true);
+        //gameOver.textScores.text = "Pontos: " + scores;
+        //gameOver.gameObject.SetActive(true);
     }
 }

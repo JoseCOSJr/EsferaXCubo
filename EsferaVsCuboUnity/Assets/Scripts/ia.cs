@@ -48,7 +48,7 @@ public class ia : MonoBehaviour
                         distTarget = 1f;
                         moveTarget = true;
                         //Olhar apara direção do movimento
-                        atb.GetMovement().TurnTo(Vector2.SignedAngle(Vector2.up, dire));
+                        //atb.GetMovement().TurnTo(Vector2.SignedAngle(Vector2.up, dire));
                     }
 
                     //Visão da IA
@@ -110,7 +110,7 @@ public class ia : MonoBehaviour
                             Vector2 dire = targetPosition;
                             dire.x -= transform.position.x;
                             dire.y -= transform.position.y;
-                            atb.GetMovement().TurnTo(Vector2.SignedAngle(Vector2.up, dire));
+                            //atb.GetMovement().TurnTo(Vector2.SignedAngle(Vector2.up, dire));
                             distTarget = 2f;
                             moveTarget = true;
                         }
@@ -123,7 +123,7 @@ public class ia : MonoBehaviour
 
                     if (delta.magnitude < act.ReachNow() && renderer.isVisible && !atbTarget.IsDead())
                     {
-                        float angZNeed = Vector2.SignedAngle(Vector2.up, delta), angZNow = transform.eulerAngles.z;
+                        /*float angZNeed = Vector2.SignedAngle(Vector2.up, delta), angZNow = transform.eulerAngles.z;
                         if (angZNeed < 0f)
                             angZNeed += 360f;
                         if (angZNow < 0f)
@@ -138,7 +138,7 @@ public class ia : MonoBehaviour
                         else
                         {
                             act.Fire();
-                        }
+                        }*/
                     }
                     else
                     {

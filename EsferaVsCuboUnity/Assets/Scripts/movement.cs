@@ -7,10 +7,12 @@ public class movement : MonoBehaviour
     [SerializeField]
     private float speed = 3f;
     private attributes atb;
+    private controllAnimations controllAnima; 
 
     // Start is called before the first frame update
     void Start()
     {
+        controllAnima = GetComponent<controllAnimations>();
         atb = GetComponent<attributes>();
         body = GetComponent<Rigidbody2D>();
     }
@@ -35,18 +37,42 @@ public class movement : MonoBehaviour
             {
                 body.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
+
+            if (dire.y * dire.y > dire.x *dire.x)
+            {
+                if (dire.y > 0f)
+                {
+                    controllAnima.SetMovement(true, controllAnimations.direction.up);
+                }
+                else
+                {
+                    controllAnima.SetMovement(true, controllAnimations.direction.down);
+                }
+            }
+            else
+            {
+                if (dire.x > 0f)
+                {
+                    controllAnima.SetMovement(true, controllAnimations.direction.right);
+                }
+                else
+                {
+                    controllAnima.SetMovement(true, controllAnimations.direction.left);
+                }
+            }
         }
         else
         {
+            controllAnima.SetMovement(false, controllAnima.GetDirection());
             body.constraints = RigidbodyConstraints2D.FreezeAll;
         }
     }
 
-    public void TurnTo(float ang)
+    /*public void TurnTo(float ang)
     {
         if (!atb.InHitStun())
             transform.eulerAngles = Vector3.forward * ang;
-    }
+    }*/
 
     public void AddForce(Vector2 force)
     {

@@ -40,16 +40,28 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 0
       enableTightPacking: 0
+    secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: a544e119de3713448b65e002e2b297ba, type: 3}
-    totalSpriteSurfaceArea: 20492
+    totalSpriteSurfaceArea: 312492
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: dee07920b9fa4924981182a42631126e, type: 3}
+  - {fileID: -1215029925474079248, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: 7108030625452576371, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: 1620284876936253194, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: 2340596964769188566, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: 2714806316876206032, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: -6709560357100303928, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: 8789858023511617847, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: -417665002532255730, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: -7155462395484509650, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: 1996347470542496731, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
+  - {fileID: 572709342522308912, guid: ab9a6b5224850cc4cae04faaf36804e5, type: 3}
   - {fileID: 21300000, guid: 9ce4cb922a9c54d428a35c1e9ed06d80, type: 3}
   - {fileID: 21300000, guid: d07e67075a1a83846ba474cdc4a0cb31, type: 3}
   - {fileID: 21300000, guid: 761dfbd7dcc327a4695b5abc26711903, type: 3}
@@ -57,10 +69,22 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e27d5edc7f22f184f8f364b83d90d3f5, type: 3}
   m_PackedSpriteNamesToIndex:
   - IconeGame
+  - Motoko_9
+  - Motoko_8
+  - Motoko_3
+  - Motoko_2
+  - Motoko_1
+  - Motoko_0
+  - Motoko_7
+  - Motoko_6
+  - Motoko_5
+  - Motoko_4
+  - Motoko_10
   - explosion_4
   - explosion_1
   - explosion_2
   - explosion_3
   - IconesFinalizado_Acerto
+  m_RenderDataMap: {}
   m_Tag: Sprite Atlas
   m_IsVariant: 0
